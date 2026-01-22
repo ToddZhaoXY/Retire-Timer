@@ -1,0 +1,617 @@
+/* ============ Reset & Base ============ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+    color: #202124;
+    font-size: 14px;
+}
+
+/* ============ Header ============ */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.bing-logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-right: 24px;
+}
+
+.bing-logo-icon {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #00a9e0, #7fba00, #f25022, #ffb900);
+    border-radius: 2px;
+}
+
+.search-box {
+    flex: 1;
+    max-width: 640px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    padding: 8px 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.search-box:hover,
+.search-box:focus-within {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-icon {
+    color: #666;
+    margin-right: 12px;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.mic-icon {
+    color: #666;
+    cursor: pointer;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: auto;
+    padding-left: 20px;
+}
+
+.points {
+    font-size: 14px;
+    color: #333;
+}
+
+.header-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.avatar {
+    background-color: #4a4a4a;
+}
+
+.menu-icon {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* ============ Navigation ============ */
+.nav-tabs {
+    display: flex;
+    gap: 24px;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.nav-tab {
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    padding-bottom: 8px;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-tab.active {
+    color: #333;
+    font-weight: 500;
+    border-bottom-color: #333;
+}
+
+.nav-tab:hover {
+    color: #333;
+}
+
+/* ============ Main Content ============ */
+.main-content {
+    display: flex;
+    padding: 20px;
+    max-width: 1400px;
+}
+
+.left-content {
+    flex: 1;
+    max-width: 700px;
+}
+
+.results-count {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+/* ============ Countdown Card ============ */
+.countdown-card {
+    background-color: #f6f5ff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #333;
+}
+
+/* Input Section */
+.input-section {
+    margin-bottom: 24px;
+}
+
+.input-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.date-input,
+.age-input {
+    padding: 10px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.date-input:focus,
+.age-input:focus {
+    border-color: #5c4fd6;
+    box-shadow: 0 0 0 3px rgba(92, 79, 214, 0.1);
+}
+
+.date-input {
+    min-width: 180px;
+}
+
+.age-input {
+    width: 100px;
+}
+
+.button-row {
+    display: flex;
+    gap: 12px;
+}
+
+/* ============ Buttons ============ */
+.btn {
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-start {
+    background-color: #5c4fd6;
+    color: white;
+}
+
+.btn-start:hover {
+    background-color: #4a3fc4;
+}
+
+.btn-reset {
+    background-color: #e8e6f5;
+    color: #5c4fd6;
+}
+
+.btn-reset:hover {
+    background-color: #ddd9f0;
+}
+
+/* ============ Countdown Display ============ */
+.countdown-display {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.countdown-label {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.countdown-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+}
+
+.time-value {
+    font-size: 42px;
+    font-weight: 300;
+    color: #5c4fd6;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.time-label {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+.time-separator {
+    font-size: 36px;
+    color: #999;
+    font-weight: 300;
+    margin-bottom: 16px;
+}
+
+.retired-message {
+    font-size: 24px;
+    color: #28a745;
+    font-weight: 600;
+    padding: 20px;
+}
+
+.retirement-info {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e8e6f5;
+}
+
+/* ============ Other Tools ============ */
+.other-tools {
+    background-color: #f6f5ff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.other-tools-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.tools-grid {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.tool-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s;
+}
+
+.tool-item:hover {
+    transform: translateY(-2px);
+}
+
+.tool-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e5e5;
+    font-size: 36px;
+    transition: box-shadow 0.2s;
+}
+
+.tool-item:hover .tool-icon {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.tool-name {
+    font-size: 12px;
+    color: #333;
+    max-width: 80px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ============ Feedback ============ */
+.feedback {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    font-size: 12px;
+    color: #666;
+}
+
+.feedback-icon {
+    cursor: pointer;
+    padding: 4px;
+    transition: transform 0.2s;
+}
+
+.feedback-icon:hover {
+    transform: scale(1.2);
+}
+
+/* ============ Search Result ============ */
+.search-result {
+    padding: 16px 0;
+}
+
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.result-favicon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.result-site {
+    display: flex;
+    flex-direction: column;
+}
+
+.result-site-name {
+    font-size: 14px;
+    color: #333;
+}
+
+.result-url {
+    font-size: 12px;
+    color: #666;
+}
+
+.result-title {
+    font-size: 18px;
+    color: #1a0dab;
+    margin-bottom: 8px;
+    cursor: pointer;
+    display: block;
+}
+
+.result-title:hover {
+    text-decoration: underline;
+}
+
+.result-description {
+    font-size: 14px;
+    color: #4d5156;
+    line-height: 1.5;
+}
+
+/* ============ Right Sidebar ============ */
+.right-sidebar {
+    width: 360px;
+    padding-left: 40px;
+}
+
+.sidebar-title {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.related-searches {
+    display: flex;
+    flex-direction: column;
+}
+
+.related-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.related-item:hover {
+    background-color: #f5f5f5;
+}
+
+.related-icon {
+    color: #666;
+}
+
+.related-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.related-text strong {
+    font-weight: 600;
+}
+
+.search-tools {
+    margin-top: 24px;
+}
+
+.search-tools-title {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.search-tools-link {
+    color: #1a0dab;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.search-tools-link:hover {
+    text-decoration: underline;
+}
+
+/* ============ SVG Icons ============ */
+svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1024px) {
+    .right-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 16px;
+    }
+
+    .countdown-card {
+        padding: 16px;
+    }
+
+    .input-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .date-input,
+    .age-input {
+        width: 100%;
+    }
+
+    .time-value {
+        font-size: 28px;
+    }
+
+    .time-separator {
+        font-size: 24px;
+    }
+
+    .time-unit {
+        min-width: 45px;
+    }
+
+    .tools-grid {
+        justify-content: center;
+    }
+
+    .tool-icon {
+        width: 64px;
+        height: 64px;
+        font-size: 28px;
+    }
+
+    .tool-name {
+        max-width: 64px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .search-box {
+        order: 3;
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+
+    .header-right {
+        padding-left: 0;
+    }
+
+    .countdown-time {
+        gap: 4px;
+    }
+
+    .time-value {
+        font-size: 22px;
+    }
+
+    .time-separator {
+        font-size: 18px;
+        margin: 0 2px;
+    }
+
+    .time-unit {
+        min-width: 38px;
+    }
+
+    .time-label {
+        font-size: 10px;
+    }
+}

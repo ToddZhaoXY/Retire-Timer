@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>retirement countdown - Bing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        /* ============ Reset & Base ============ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+            color: #202124;
+            font-size: 14px;
+            min-height: 100vh;
+        }
+
+        /* ============ Header ============ */
+        .header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border-bottom: 1px solid #ececec;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .bing-logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .ms-logo {
+            display: grid;
+            grid-template-columns: 8px 8px;
+            grid-template-rows: 8px 8px;
+            gap: 1.5px;
+            width: 17px;
+            height: 17px;
+        }
+
+        .ms-logo-red { background-color: #f25022; }
+        .ms-logo-green { background-color: #7fba00; }
+        .ms-logo-blue { background-color: #00a4ef; }
+        .ms-logo-yellow { background-color: #ffb900; }
+
+        .bing-text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #333;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.09), 0px 0px 0px 1px rgba(0,0,0,0.05);
+            width: 650px;
+            height: 44px;
+            padding: 0 16px;
+        }
+
+        .search-box:hover,
+        .search-box:focus-within {
+            box-shadow: 0px 2px 8px 1px rgba(0,0,0,0.12), 0px 0px 0px 1px rgba(0,0,0,0.08);
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            color: #767676;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #111;
+            font-family: 'Roboto', sans-serif;
+            background: transparent;
+        }
+
+        .search-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-action-icon {
+            width: 20px;
+            height: 20px;
+            color: #174AE4;
+            cursor: pointer;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .rewards-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .points {
+            font-size: 14px;
+            color: #444;
+        }
+
+        .rewards-icon-wrapper {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rewards-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #C80100;
+            border-radius: 50%;
+            transform: translate(2px, -2px);
+            border: 1px solid white;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #ccc;
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        /* ============ Navigation Tabs ============ */
+        .nav-tabs {
+            display: flex;
+            align-items: center;
+            padding: 0 160px;
+            gap: 24px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 0;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .nav-tab:hover {
+            opacity: 1;
+        }
+
+        .nav-tab.active {
+            border-bottom-color: #174ae4;
+            opacity: 1;
+        }
+
+        .nav-tab.active .nav-icon {
+            color: #174AE4;
+        }
+
+        .nav-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ============ Main Content ============ */
+        .main-content {
+            display: flex;
+            gap: 80px;
+            padding: 24px 0 24px 160px;
+            max-width: 1440px;
+        }
+
+        .left-content {
+            display: flex;
+            flex-direction: column;
+            width: 648px;
+            flex-shrink: 0;
+        }
+
+        .results-count {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        /* ============ Countdown Card ============ */
+        .countdown-card {
+            background-color: #f6f5ff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #202124;
+        }
+
+        /* Input Section */
+        .input-section {
+            margin-bottom: 24px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .date-input,
+        .age-input {
+            padding: 10px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #fff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .date-input:focus,
+        .age-input:focus {
+            border-color: #5c4fd6;
+            box-shadow: 0 0 0 3px rgba(92, 79, 214, 0.1);
+        }
+
+        .date-input {
+            min-width: 180px;
+        }
+
+        .age-input {
+            width: 100px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* ============ Buttons ============ */
+        .btn {
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn-start {
+            background-color: #5c4fd6;
+            color: white;
+        }
+
+        .btn-start:hover {
+            background-color: #4a3fc4;
+        }
+
+        .btn-reset {
+            background-color: #e8e6f5;
+            color: #5c4fd6;
+        }
+
+        .btn-reset:hover {
+            background-color: #ddd9f0;
+        }
+
+        /* ============ Countdown Display ============ */
+        .countdown-display {
+            text-align: center;
+            padding: 16px 0;
+        }
+
+        .countdown-label {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .countdown-time {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 50px;
+            transition: transform 0.2s ease, filter 0.2s ease;
+            cursor: default;
+        }
+
+        .time-unit:hover {
+            transform: scale(1.25);
+            filter: drop-shadow(0 4px 8px rgba(92, 79, 214, 0.3));
+            z-index: 10;
+        }
+
+        .time-value {
+            font-size: 36px;
+            font-weight: 300;
+            color: #5c4fd6;
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+
+        .time-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .time-separator {
+            font-size: 30px;
+            color: #999;
+            font-weight: 300;
+            margin-top: 2px;
+        }
+
+        .time-separator-dot {
+            font-size: 30px;
+            color: #999;
+            font-weight: 300;
+            margin-top: 2px;
+        }
+
+        .retired-message {
+            font-size: 24px;
+            color: #28a745;
+            font-weight: 600;
+            padding: 20px;
+        }
+
+        .retirement-info {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e8e6f5;
+        }
+
+        /* ============ Other Tools ============ */
+        .other-tools {
+            background-color: #f6f5ff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .other-tools-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .tools-grid {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tool-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+        }
+
+        .tool-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .tool-icon {
+            width: 88px;
+            height: 88px;
+            background-color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e5e5e5;
+            padding: 14px;
+            transition: box-shadow 0.2s;
+        }
+
+        .tool-item:hover .tool-icon {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .tool-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .tool-name {
+            font-size: 12px;
+            color: #333;
+            max-width: 88px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ============ Feedback ============ */
+        .feedback {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .feedback-icon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .feedback-icon:hover {
+            color: #333;
+        }
+
+        /* ============ Search Result ============ */
+        .search-result {
+            padding: 16px 0;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .result-favicon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .result-site {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-site-name {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .result-url {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .result-title {
+            font-size: 18px;
+            color: #1a0dab;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: block;
+        }
+
+        .result-title:hover {
+            text-decoration: underline;
+        }
+
+        .result-description {
+            font-size: 14px;
+            color: #4d5156;
+            line-height: 1.5;
+        }
+
+        /* ============ Right Sidebar ============ */
+        .right-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 360px;
+            flex-shrink: 0;
+            padding-top: 16px;
+        }
+
+        .sidebar-title {
+            font-size: 20px;
+            font-weight: 400;
+            color: #444;
+            line-height: 24px;
+        }
+
+        .related-searches {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .related-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background-color: #f9f9f9;
+            border-radius: 24px;
+            padding: 8px 16px;
+            border: 1px solid #f5f5f5;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .related-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .related-icon {
+            width: 20px;
+            height: 20px;
+            color: #666;
+            flex-shrink: 0;
+        }
+
+        .related-text {
+            font-size: 14px;
+            color: #000;
+        }
+
+        .related-text strong {
+            font-weight: 700;
+        }
+
+        .search-tools {
+            margin-top: 8px;
+        }
+
+        .search-tools-title {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            color: #444;
+        }
+
+        .search-tools-link {
+            color: #1a0dab;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .search-tools-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ============ Responsive ============ */
+        @media (max-width: 1200px) {
+            .main-content {
+                padding-left: 24px;
+                gap: 40px;
+            }
+            .nav-tabs {
+                padding: 0 24px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .right-sidebar {
+                display: none;
+            }
+            .search-box {
+                width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 16px;
+            }
+            .left-content {
+                width: 100%;
+            }
+            .search-box {
+                width: 100%;
+                max-width: 400px;
+            }
+            .nav-tabs {
+                padding: 0 16px;
+                gap: 16px;
+            }
+            .input-row {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .date-input,
+            .age-input {
+                width: 100%;
+            }
+            .time-value {
+                font-size: 28px;
+            }
+            .time-separator {
+                font-size: 24px;
+            }
+            .time-unit {
+                min-width: 45px;
+            }
+        }
+
+        /* Flatpickr custom styles */
+        .flatpickr-calendar {
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+        }
+    </style>
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="header-left">
+                <a class="bing-logo" href="#">
+                    <div class="ms-logo">
+                        <div class="ms-logo-red"></div>
+                        <div class="ms-logo-green"></div>
+                        <div class="ms-logo-blue"></div>
+                        <div class="ms-logo-yellow"></div>
+                    </div>
+                    <span class="bing-text">Bing</span>
+                </a>
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" class="search-input" value="retirement countdown">
+                    <div class="search-actions">
+                        <svg class="search-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" x2="12" y1="19" y2="22"></line>
+                        </svg>
+                        <svg class="search-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <div class="rewards-wrapper">
+                    <span class="points">787</span>
+                    <div class="rewards-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+                            <path d="M16 0.75C24.4223 0.75 31.25 7.57766 31.25 16C31.25 24.4223 24.4223 31.25 16 31.25C7.57766 31.25 0.75 24.4223 0.75 16C0.75 7.57766 7.57766 0.75 16 0.75Z" stroke="url(#paint0_linear)" stroke-width="1.5"></path>
+                            <path d="M22.1877 8.125H9.81252C8.88053 8.125 8.125 8.873 8.125 9.79571V11.5477C8.125 12.1805 8.48613 12.759 9.05784 13.042L15.2454 16.105C15.7205 16.3402 16.2797 16.3402 16.7548 16.105L22.9424 13.042C23.5141 12.759 23.8752 12.1805 23.8752 11.5477V9.79571C23.8752 8.873 23.1197 8.125 22.1877 8.125Z" fill="url(#paint1_linear)"></path>
+                            <ellipse cx="15.9999" cy="19.3749" rx="5.62508" ry="5.62508" fill="url(#paint2_radial)"></ellipse>
+                            <ellipse cx="15.9999" cy="19.3749" rx="4.21881" ry="4.21881" fill="url(#paint3_linear)"></ellipse>
+                            <defs>
+                                <linearGradient id="paint0_linear" x1="0" y1="0" x2="29.7143" y2="28" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#37B9F4"></stop>
+                                    <stop offset="0.5" stop-color="#3B90F5"></stop>
+                                    <stop offset="1" stop-color="#6075F7"></stop>
+                                </linearGradient>
+                                <linearGradient id="paint1_linear" x1="31.7503" y1="13.3789" x2="16.1828" y2="19.5328" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#3090F3"></stop>
+                                    <stop offset="1" stop-color="#263CAA"></stop>
+                                </linearGradient>
+                                <radialGradient id="paint2_radial" cx="0" cy="0" r="1" gradientTransform="translate(14.4901 13.7498) scale(10.8352 22.134)" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#5750E2"></stop>
+                                    <stop offset="0.45" stop-color="#367AF2"></stop>
+                                    <stop offset="1" stop-color="#6CB8FE"></stop>
+                                </radialGradient>
+                                <linearGradient id="paint3_linear" x1="12.9363" y1="16.703" x2="19.0937" y2="22.8605" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#1EADFA"></stop>
+                                    <stop offset="1" stop-color="#5750E2"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="rewards-badge"></span>
+                    </div>
+                </div>
+                <div class="avatar">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                </div>
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <div class="nav-tab active">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <span>Search</span>
+            </div>
+            <div class="nav-tab"><span>Copilot</span></div>
+            <div class="nav-tab"><span>Images</span></div>
+            <div class="nav-tab"><span>Videos</span></div>
+            <div class="nav-tab"><span>Maps</span></div>
+            <div class="nav-tab"><span>News</span></div>
+            <div class="nav-tab"><span>More</span></div>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main class="main-content">
+        <div class="left-content">
+            <div class="results-count">About 223,000 results</div>
+
+            <!-- Retirement Countdown Card -->
+            <div class="countdown-card">
+                <h2 class="card-title">Retirement Countdown</h2>
+
+                <!-- Input Section -->
+                <div class="input-section">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="birthday">Date of Birth</label>
+                            <input type="text" id="birthday" class="date-input" placeholder="Select date">
+                        </div>
+                        <div class="input-group">
+                            <label for="retirementAge">Retirement Age</label>
+                            <input type="number" id="retirementAge" class="age-input" value="65" min="50" max="80">
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <button class="btn btn-start" id="startBtn">Calculate</button>
+                        <button class="btn btn-reset" id="resetBtn">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Countdown Display -->
+                <div class="countdown-display" id="countdownDisplay" style="display: none;">
+                    <div class="countdown-label" id="countdownLabel">Time until retirement</div>
+                    <div class="countdown-time">
+                        <div class="time-unit">
+                            <span class="time-value" id="years">00</span>
+                            <span class="time-label">Years</span>
+                        </div>
+                        <span class="time-separator">:</span>
+                        <div class="time-unit">
+                            <span class="time-value" id="months">00</span>
+                            <span class="time-label">Months</span>
+                        </div>
+                        <span class="time-separator">:</span>
+                        <div class="time-unit">
+                            <span class="time-value" id="days">00</span>
+                            <span class="time-label">Days</span>
+                        </div>
+                        <span class="time-separator">:</span>
+                        <div class="time-unit">
+                            <span class="time-value" id="hours">00</span>
+                            <span class="time-label">Hours</span>
+                        </div>
+                        <span class="time-separator">:</span>
+                        <div class="time-unit">
+                            <span class="time-value" id="minutes">00</span>
+                            <span class="time-label">Mins</span>
+                        </div>
+                        <span class="time-separator">:</span>
+                        <div class="time-unit">
+                            <span class="time-value" id="seconds">00</span>
+                            <span class="time-label">Secs</span>
+                        </div>
+                        <span class="time-separator-dot">.</span>
+                        <div class="time-unit">
+                            <span class="time-value" id="milliseconds">000</span>
+                            <span class="time-label">ms</span>
+                        </div>
+                    </div>
+                    <!-- Retired Message -->
+                    <div class="retired-message" id="retiredMessage" style="display: none;">Congratulations! You are retired!</div>
+                </div>
+
+                <!-- Retirement Date Info -->
+                <div class="retirement-info" id="retirementInfo" style="display: none;">
+                    <span id="retirementDateText"></span>
+                </div>
+            </div>
+
+            <!-- Other tools -->
+            <div class="other-tools">
+                <h3 class="other-tools-title">Other tools</h3>
+                <div class="tools-grid">
+                    <a class="tool-item" href="stopwatch.html">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 64 64" fill="none">
+                                <circle cx="32" cy="36" r="20" stroke="#7b68ee" stroke-width="3" fill="#e8e6ff"/>
+                                <path d="M32 20v-8M28 12h8" stroke="#7b68ee" stroke-width="3" stroke-linecap="round"/>
+                                <circle cx="32" cy="36" r="3" fill="#7b68ee"/>
+                                <path d="M32 36V24" stroke="#7b68ee" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M32 36L40 44" stroke="#e74c3c" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="tool-name">Stopwatch</span>
+                    </a>
+                    <a class="tool-item" href="#">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 64 64" fill="none">
+                                <circle cx="32" cy="36" r="24" stroke="#7b68ee" stroke-width="3" fill="#e8e6ff"/>
+                                <path d="M32 36 L42 20" stroke="#e74c3c" stroke-width="3" stroke-linecap="round"/>
+                                <circle cx="32" cy="36" r="4" fill="#7b68ee"/>
+                                <path d="M16 36 A16 16 0 0 1 48 36" stroke="#7b68ee" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <span class="tool-name">Internet spee...</span>
+                    </a>
+                    <a class="tool-item" href="#">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 64 64" fill="none">
+                                <rect x="8" y="8" width="20" height="20" rx="2" stroke="#7b68ee" stroke-width="2" fill="#e8e6ff"/>
+                                <rect x="12" y="12" width="12" height="12" rx="1" fill="#7b68ee"/>
+                                <rect x="36" y="8" width="20" height="20" rx="2" stroke="#7b68ee" stroke-width="2" fill="#e8e6ff"/>
+                                <rect x="40" y="12" width="12" height="12" rx="1" fill="#7b68ee"/>
+                                <rect x="8" y="36" width="20" height="20" rx="2" stroke="#7b68ee" stroke-width="2" fill="#e8e6ff"/>
+                                <rect x="12" y="40" width="12" height="12" rx="1" fill="#7b68ee"/>
+                                <rect x="36" y="36" width="8" height="8" fill="#7b68ee"/>
+                                <rect x="48" y="36" width="8" height="8" fill="#7b68ee"/>
+                                <rect x="36" y="48" width="8" height="8" fill="#7b68ee"/>
+                                <rect x="48" y="48" width="8" height="8" fill="#7b68ee"/>
+                            </svg>
+                        </div>
+                        <span class="tool-name">QR code gen...</span>
+                    </a>
+                    <a class="tool-item" href="#">
+                        <div class="tool-icon">
+                            <svg viewBox="0 0 64 64" fill="none">
+                                <path d="M18 8h28M18 56h28" stroke="#7b68ee" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M20 8v12c0 4 4 8 12 12c-8 4-12 8-12 12v12h24V44c0-4-4-8-12-12c8-4 12-8 12-12V8H20z" stroke="#7b68ee" stroke-width="2" fill="#e8e6ff"/>
+                                <path d="M24 44c0-2 2-4 8-8c6 4 8 6 8 8v8H24v-8z" fill="#c4b8ff"/>
+                            </svg>
+                        </div>
+                        <span class="tool-name">Timer</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Feedback -->
+            <div class="feedback">
+                <span>Feedback</span>
+                <svg class="feedback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                </svg>
+                <svg class="feedback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+                </svg>
+            </div>
+
+            <!-- Search result -->
+            <div class="search-result">
+                <div class="result-header">
+                    <div class="result-favicon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="result-site">
+                        <span class="result-site-name">Retirement Calculator</span>
+                        <span class="result-url">https://www.retirement-calculator.com</span>
+                    </div>
+                </div>
+                <a class="result-title">Retirement Countdown Calculator - Online Tool</a>
+                <p class="result-description">Calculate how long until you retire and plan for your future retirement life. Simply enter your date of birth and expected retirement age...</p>
+            </div>
+        </div>
+
+        <!-- Right sidebar -->
+        <aside class="right-sidebar">
+            <h2 class="sidebar-title">Deep dive into retirement countdown</h2>
+            <div class="related-searches">
+                <div class="related-item">
+                    <svg class="related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <span class="related-text">retirement <strong>age calculator</strong></span>
+                </div>
+                <div class="related-item">
+                    <svg class="related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <span class="related-text">early retirement <strong>planning</strong></span>
+                </div>
+                <div class="related-item">
+                    <svg class="related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <span class="related-text">retirement <strong>savings calculator</strong></span>
+                </div>
+                <div class="related-item">
+                    <svg class="related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <span class="related-text"><strong>social security</strong> benefits</span>
+                </div>
+                <div class="related-item">
+                    <svg class="related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <span class="related-text">retirement <strong>planning tips</strong></span>
+                </div>
+                <div class="related-item">
+                    <svg class="related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <span class="related-text">pension <strong>calculator</strong></span>
+                </div>
+                <div class="related-item">
+                    <svg class="related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <span class="related-text">401k <strong>retirement</strong></span>
+                </div>
+                <div class="related-item">
+                    <svg class="related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <span class="related-text">retirement <strong>lifestyle</strong></span>
+                </div>
+            </div>
+
+            <div class="search-tools">
+                <h3 class="search-tools-title">Search Tools</h3>
+                <a class="search-tools-link">Turn off Hover Translation</a>
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        // ============ Countdown Functionality ============
+        let countdownInterval = null;
+        let retirementDate = null;
+
+        function startCountdown() {
+            const birthdayInput = document.getElementById('birthday');
+            const retirementAgeInput = document.getElementById('retirementAge');
+
+            if (!birthdayInput.value) {
+                alert('Please enter your date of birth');
+                return;
+            }
+
+            const birthday = new Date(birthdayInput.value);
+            const retirementAge = parseInt(retirementAgeInput.value);
+
+            // Calculate retirement date
+            retirementDate = new Date(birthday);
+            retirementDate.setFullYear(birthday.getFullYear() + retirementAge);
+
+            // Show retirement date info
+            const retirementInfo = document.getElementById('retirementInfo');
+            const retirementDateText = document.getElementById('retirementDateText');
+            retirementDateText.textContent = `Retirement Date: ${retirementDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+            retirementInfo.style.display = 'block';
+
+            // Show countdown
+            document.getElementById('countdownDisplay').style.display = 'block';
+
+            // Clear previous timer
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+
+            // Update immediately
+            updateCountdown();
+
+            // Update every second
+            countdownInterval = setInterval(updateCountdown, 10);
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = retirementDate - now;
+
+            const countdownTime = document.querySelector('.countdown-time');
+            const retiredMessage = document.getElementById('retiredMessage');
+
+            if (diff <= 0) {
+                // Already retired
+                countdownTime.style.display = 'none';
+                retiredMessage.style.display = 'block';
+                document.getElementById('countdownLabel').style.display = 'none';
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                }
+                return;
+            }
+
+            countdownTime.style.display = 'flex';
+            retiredMessage.style.display = 'none';
+            document.getElementById('countdownLabel').style.display = 'block';
+
+            // Calculate time units
+            const totalMilliseconds = diff;
+            const totalSeconds = Math.floor(diff / 1000);
+            const totalMinutes = Math.floor(totalSeconds / 60);
+            const totalHours = Math.floor(totalMinutes / 60);
+
+            // Use more precise year/month calculation
+            let years = retirementDate.getFullYear() - now.getFullYear();
+            let months = retirementDate.getMonth() - now.getMonth();
+            let days = retirementDate.getDate() - now.getDate();
+
+            // Adjust for negative values
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                days += lastMonth.getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            // Calculate remaining hours, minutes, seconds, milliseconds
+            const hours = totalHours % 24;
+            const minutes = totalMinutes % 60;
+            const seconds = totalSeconds % 60;
+            const milliseconds = totalMilliseconds % 1000;
+
+            // Update display
+            document.getElementById('years').textContent = years.toString().padStart(2, '0');
+            document.getElementById('months').textContent = months.toString().padStart(2, '0');
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            document.getElementById('milliseconds').textContent = milliseconds.toString().padStart(3, '0');
+        }
+
+        function resetCountdown() {
+            // Clear timer
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+
+            // Reset inputs
+            document.getElementById('birthday').value = '';
+            document.getElementById('retirementAge').value = '65';
+
+            // Hide countdown display
+            document.getElementById('countdownDisplay').style.display = 'none';
+            document.getElementById('retirementInfo').style.display = 'none';
+
+            // Reset countdown values
+            document.getElementById('years').textContent = '00';
+            document.getElementById('months').textContent = '00';
+            document.getElementById('days').textContent = '00';
+            document.getElementById('hours').textContent = '00';
+            document.getElementById('minutes').textContent = '00';
+            document.getElementById('seconds').textContent = '00';
+            document.getElementById('milliseconds').textContent = '000';
+
+            // Reset state display
+            document.querySelector('.countdown-time').style.display = 'flex';
+            document.getElementById('retiredMessage').style.display = 'none';
+            document.getElementById('countdownLabel').style.display = 'block';
+        }
+
+        // ============ Event Bindings ============
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Flatpickr for date input (English locale)
+            flatpickr("#birthday", {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "F j, Y",
+                locale: "en",
+                maxDate: "today",
+                yearRange: [1940, new Date().getFullYear()],
+                defaultDate: null,
+                disableMobile: true
+            });
+
+            document.getElementById('startBtn').addEventListener('click', startCountdown);
+            document.getElementById('resetBtn').addEventListener('click', resetCountdown);
+
+            // Enter key triggers calculation
+            document.getElementById('birthday').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') startCountdown();
+            });
+            document.getElementById('retirementAge').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') startCountdown();
+            });
+        });
+    </script>
+</body>
+</html>

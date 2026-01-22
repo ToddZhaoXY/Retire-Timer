@@ -242,10 +242,33 @@
 
         /* ============ Stopwatch Card ============ */
         .stopwatch-card {
+            position: relative;
             background-color: #f6f5ff;
             border-radius: 12px;
             padding: 24px;
             margin-bottom: 16px;
+        }
+
+        .retire-timer-link {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #5c4fd6;
+            font-size: 13px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .retire-timer-link:hover {
+            opacity: 0.7;
+        }
+
+        .retire-timer-link svg {
+            width: 16px;
+            height: 16px;
         }
 
         .stopwatch-title {
@@ -557,6 +580,98 @@
             text-decoration: underline;
         }
 
+        /* ============ Widget Styles ============ */
+        .countdown-widget {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 32px;
+            padding: 0 12px;
+            background-color: #f6f5ff;
+            border-radius: 16px;
+            font-size: 13px;
+            color: #5c4fd6;
+            white-space: nowrap;
+            flex-shrink: 0;
+            line-height: 32px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .countdown-widget:hover {
+            background-color: #e8e6f5;
+        }
+
+        /* Widget Tooltip */
+        .countdown-widget::after {
+            content: 'Retire Timer - Click to view details';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            padding: 8px 12px;
+            background-color: #333;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+            border-radius: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Tooltip arrow */
+        .countdown-widget::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-bottom-color: #333;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .countdown-widget:hover::after,
+        .countdown-widget:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .countdown-widget .widget-time {
+            font-weight: 400;
+            display: inline;
+        }
+
+        .countdown-widget .widget-time span {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .countdown-widget .widget-separator {
+            color: #c4b8ff;
+            font-weight: 300;
+            display: inline;
+        }
+
+        .countdown-widget .widget-time-small {
+            font-size: 13px;
+            font-weight: 600;
+            color: #5c4fd6;
+            font-variant-numeric: tabular-nums;
+            display: inline;
+        }
+
         /* ============ Responsive ============ */
         @media (max-width: 1200px) {
             .main-content {
@@ -634,6 +749,18 @@
             </div>
 
             <div class="header-right">
+                <!-- Countdown Widget (compact bar) -->
+                <div class="countdown-widget" id="countdownWidget" style="display: none;">
+                    <span class="widget-time">
+                        <span id="widgetYears">00</span>Y
+                        <span id="widgetMonths">00</span>M
+                        <span id="widgetDays">00</span>D
+                    </span>
+                    <span class="widget-separator">|</span>
+                    <span class="widget-time-small">
+                        <span id="widgetHours">00</span>:<span id="widgetMinutes">00</span>:<span id="widgetSeconds">00</span>
+                    </span>
+                </div>
                 <div class="rewards-wrapper">
                     <span class="points">787</span>
                     <div class="rewards-icon-wrapper">
@@ -712,22 +839,40 @@
                     <button class="btn btn-lap" id="lapBtn" style="display: none;">Lap</button>
                 </div>
                 <div class="lap-times" id="lapTimes"></div>
+                <a class="retire-timer-link" href="index.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Retire Timer
+                </a>
             </div>
 
             <!-- Other tools -->
             <div class="other-tools">
                 <h3 class="other-tools-title">Other tools</h3>
                 <div class="tools-grid">
-                    <a class="tool-item" href="index.html">
+                    <a class="tool-item" href="#">
                         <div class="tool-icon">
                             <svg viewBox="0 0 64 64" fill="none">
-                                <circle cx="32" cy="32" r="22" stroke="#7b68ee" stroke-width="3" fill="#e8e6ff"/>
-                                <path d="M32 14v18l12 8" stroke="#7b68ee" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="32" cy="32" r="3" fill="#7b68ee"/>
-                                <path d="M32 10v-4M32 58v-4M10 32h4M50 32h4" stroke="#7b68ee" stroke-width="2" stroke-linecap="round"/>
+                                <rect x="10" y="6" width="44" height="52" rx="4" stroke="#7b68ee" stroke-width="2" fill="#e8e6ff"/>
+                                <rect x="14" y="12" width="36" height="12" rx="2" fill="#d4cfff"/>
+                                <rect x="14" y="28" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="24" y="28" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="34" y="28" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="44" y="28" width="8" height="6" rx="1" fill="#c4b8ff"/>
+                                <rect x="14" y="36" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="24" y="36" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="34" y="36" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="44" y="36" width="8" height="6" rx="1" fill="#c4b8ff"/>
+                                <rect x="14" y="44" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="24" y="44" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="34" y="44" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="44" y="44" width="8" height="12" rx="1" fill="#5c4fd6"/>
+                                <rect x="14" y="52" width="18" height="6" rx="1" fill="#7b68ee"/>
                             </svg>
                         </div>
-                        <span class="tool-name">Retire Timer</span>
+                        <span class="tool-name">Calculator</span>
                     </a>
                     <a class="tool-item" href="#">
                         <div class="tool-icon">
@@ -983,6 +1128,82 @@
             } else if (e.code === 'KeyL' && e.target.tagName !== 'INPUT') {
                 lap();
             }
+        });
+
+        // ============ Retirement Widget Functionality ============
+        let retirementDate = null;
+        let careerStartDate = null;
+        let widgetVisible = false;
+        let widgetInterval = null;
+
+        function initWidgetFromStorage() {
+            const saved = localStorage.getItem('retireWidget');
+            if (saved) {
+                const data = JSON.parse(saved);
+                retirementDate = new Date(data.retirementDate);
+                careerStartDate = new Date(data.careerStartDate);
+                widgetVisible = true;
+
+                const widget = document.getElementById('countdownWidget');
+                widget.style.display = 'flex';
+
+                // Update widget display
+                updateWidgetDisplay();
+                startWidgetCountdown();
+            }
+        }
+
+        function updateWidgetDisplay() {
+            if (!widgetVisible || !retirementDate) return;
+
+            const now = new Date();
+            const diff = retirementDate - now;
+
+            if (diff <= 0) return;
+
+            // Calculate time units
+            let years = retirementDate.getFullYear() - now.getFullYear();
+            let months = retirementDate.getMonth() - now.getMonth();
+            let days = retirementDate.getDate() - now.getDate();
+
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                days += lastMonth.getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            const totalSeconds = Math.floor(diff / 1000);
+            const totalMinutes = Math.floor(totalSeconds / 60);
+            const totalHours = Math.floor(totalMinutes / 60);
+            const hours = totalHours % 24;
+            const minutes = totalMinutes % 60;
+            const seconds = totalSeconds % 60;
+
+            document.getElementById('widgetYears').textContent = years.toString().padStart(2, '0');
+            document.getElementById('widgetMonths').textContent = months.toString().padStart(2, '0');
+            document.getElementById('widgetDays').textContent = days.toString().padStart(2, '0');
+            document.getElementById('widgetHours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('widgetMinutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('widgetSeconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        function startWidgetCountdown() {
+            if (widgetInterval) clearInterval(widgetInterval);
+            widgetInterval = setInterval(updateWidgetDisplay, 1000);
+        }
+
+        // Initialize widget on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initWidgetFromStorage();
+
+            // Click widget to navigate back to index.html
+            document.getElementById('countdownWidget').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
         });
     </script>
 </body>

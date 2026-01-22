@@ -244,6 +244,48 @@
             margin-bottom: 16px;
         }
 
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card-header .card-title {
+            margin-bottom: 0;
+            line-height: 24px;
+        }
+
+        /* Card Header Left Group */
+        .card-header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Back Button in Card Header */
+        .back-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            color: #5c4fd6;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            margin-right: 8px;
+        }
+
+        .back-btn:hover {
+            background-color: rgba(92, 79, 214, 0.1);
+        }
+
+        .back-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
         .card-title {
             font-size: 18px;
             font-weight: 600;
@@ -251,9 +293,50 @@
             color: #202124;
         }
 
+        .card-header-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: #666;
+            height: 28px;
+        }
+
+        .header-info-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-info-item svg {
+            width: 14px;
+            height: 14px;
+            color: #5c4fd6;
+            flex-shrink: 0;
+        }
+
+        .header-info-divider {
+            color: #ddd;
+        }
+
+        .btn.btn-small {
+            height: 24px;
+            padding:  4px 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #5c4fd6;
+            font-size: 14px;
+            line-height: 24px;
+        }
+
         /* Input Section */
         .input-section {
-            margin-bottom: 24px;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 28px;
         }
 
         .input-row {
@@ -340,6 +423,7 @@
         .countdown-display {
             text-align: center;
             padding: 16px 0;
+            margin-top: 24px;
         }
 
         .countdown-label {
@@ -351,7 +435,7 @@
         .countdown-time {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             gap: 4px;
             flex-wrap: wrap;
         }
@@ -380,23 +464,86 @@
         }
 
         .time-label {
-            font-size: 11px;
+            font-size: 12px;
             color: #666;
-            margin-top: 2px;
+            margin-top: 4px;
+        }
+
+        /* Align regular time labels with flip card labels */
+        .time-unit:not(.flip-card) {
+            padding-top: 2px;
         }
 
         .time-separator {
-            font-size: 30px;
+            font-size: 36px;
             color: #999;
             font-weight: 300;
-            margin-top: 2px;
+            line-height: 1;
+            margin-bottom: 18px;
         }
 
         .time-separator-dot {
-            font-size: 30px;
+            font-size: 36px;
             color: #999;
             font-weight: 300;
-            margin-top: 2px;
+            line-height: 1;
+            margin-bottom: 18px;
+        }
+
+        /* ============ Flip Card Calendar Styles ============ */
+        .flip-card {
+            perspective: 300px;
+        }
+
+        .flip-card .flip-card-inner {
+            position: relative;
+            width: 50px;
+            height: 58px;
+            background: linear-gradient(180deg, #5c4fd6 0%, #4a3fc4 50%, #5c4fd6 50%, #6b5ce7 100%);
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(92, 79, 214, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Middle divider line */
+        .flip-card .flip-card-inner::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Number inside flip card */
+        .flip-card .time-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Label below flip card */
+        .flip-card .time-label {
+            margin-top: 6px;
+        }
+
+        /* Flip card separator - now using dash for calendar look */
+        .flip-separator {
+            font-size: 20px;
+            color: #5c4fd6;
+            font-weight: 400;
+            margin: 0 6px;
+            margin-bottom: 20px;
+        }
+
+        /* Gap between flip cards section and regular time section */
+        .time-section-gap {
+            width: 16px;
         }
 
         .retired-message {
@@ -413,6 +560,110 @@
             margin-top: 16px;
             padding-top: 16px;
             border-top: 1px solid #e8e6f5;
+        }
+
+        /* ============ Progress Bar ============ */
+        .progress-section {
+            margin-top: 20px;
+            padding-top: 16px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background-color: #e8e6f5;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7c3aed 0%, #5c4fd6 50%, #8b5cf6 100%);
+            border-radius: 6px;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .progress-percent {
+            font-weight: 600;
+            color: #5c4fd6;
+        }
+
+        /* ============ Compact Input Mode ============ */
+        .input-section.compact {
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            border: 1px solid #e8e6f5;
+        }
+
+        .input-section.compact .input-row {
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0;
+            flex-wrap: nowrap;
+        }
+
+        .input-section.compact .input-group {
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-section.compact .input-group label {
+            display: none;
+        }
+
+        .input-section.compact .date-input {
+            min-width: 140px;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .input-section.compact .age-input {
+            width: 70px;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .input-section.compact .button-row {
+            margin-left: auto;
+        }
+
+        .input-section.compact .btn-start {
+            display: none;
+        }
+
+        .input-section.compact .btn-reset {
+            padding: 8px 16px;
+            font-size: 13px;
         }
 
         /* ============ Other Tools ============ */
@@ -696,6 +947,107 @@
         .flatpickr-calendar {
             font-family: 'Roboto', 'Segoe UI', sans-serif;
         }
+
+        /* ============ Widget Styles ============ */
+        .btn-pin {
+            background-color: #e8e6f5;
+            color: #5c4fd6;
+        }
+
+        .btn-pin:hover {
+            background-color: #ddd9f0;
+        }
+
+        .countdown-widget {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 32px;
+            padding: 0 12px;
+            background-color: #f6f5ff;
+            border-radius: 16px;
+            font-size: 13px;
+            color: #5c4fd6;
+            white-space: nowrap;
+            flex-shrink: 0;
+            line-height: 32px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .countdown-widget:hover {
+            background-color: #e8e6f5;
+        }
+
+        /* Widget Tooltip */
+        .countdown-widget::after {
+            content: 'Retire Timer - Click to view details';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            padding: 8px 12px;
+            background-color: #333;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+            border-radius: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Tooltip arrow */
+        .countdown-widget::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-bottom-color: #333;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .countdown-widget:hover::after,
+        .countdown-widget:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .countdown-widget .widget-time {
+            font-weight: 400;
+            display: inline;
+        }
+
+        .countdown-widget .widget-time span {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .countdown-widget .widget-separator {
+            color: #c4b8ff;
+            font-weight: 300;
+            display: inline;
+        }
+
+        .countdown-widget .widget-time-small {
+            font-size: 13px;
+            font-weight: 600;
+            color: #5c4fd6;
+            font-variant-numeric: tabular-nums;
+            display: inline;
+        }
     </style>
     <!-- Flatpickr JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -736,6 +1088,18 @@
             </div>
 
             <div class="header-right">
+                <!-- Countdown Widget (compact bar) -->
+                <div class="countdown-widget" id="countdownWidget" style="display: none;">
+                    <span class="widget-time">
+                        <span id="widgetYears">00</span>Y
+                        <span id="widgetMonths">00</span>M
+                        <span id="widgetDays">00</span>D
+                    </span>
+                    <span class="widget-separator">|</span>
+                    <span class="widget-time-small">
+                        <span id="widgetHours">00</span>:<span id="widgetMinutes">00</span>:<span id="widgetSeconds">00</span>
+                    </span>
+                </div>
                 <div class="rewards-wrapper">
                     <span class="points">787</span>
                     <div class="rewards-icon-wrapper">
@@ -804,7 +1168,44 @@
 
             <!-- Retirement Countdown Card -->
             <div class="countdown-card">
-                <h2 class="card-title">Retirement Countdown</h2>
+                <div class="card-header">
+                    <div class="card-header-left">
+                        <a class="back-btn" href="stopwatch.html" title="Back to Stopwatch">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 12H5"></path>
+                                <path d="M12 19l-7-7 7-7"></path>
+                            </svg>
+                        </a>
+                        <h2 class="card-title">Retire Timer</h2>
+                    </div>
+                    <div class="card-header-info" id="cardHeaderInfo" style="display: none;">
+                        <span class="header-info-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 20h18v-6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v6z"></path>
+                                <path d="M3 14s2-1 4-1 4 2 5 2 3-2 5-2 4 1 4 1"></path>
+                                <path d="M7.5 11V8"></path>
+                                <path d="M12 11V8"></path>
+                                <path d="M16.5 11V8"></path>
+                                <circle cx="7.5" cy="6" r="1"></circle>
+                                <circle cx="12" cy="6" r="1"></circle>
+                                <circle cx="16.5" cy="6" r="1"></circle>
+                            </svg>
+                            <span id="headerBirthday">-</span>
+                        </span>
+                        <span class="header-info-divider">|</span>
+                        <span class="header-info-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span id="headerRetirement">-</span>
+                        </span>
+                        <button class="btn btn-reset btn-small" id="headerResetBtn">Reset</button>
+                        <button class="btn btn-pin btn-small" id="pinWidgetBtn">Pin</button>
+                    </div>
+                </div>
 
                 <!-- Input Section -->
                 <div class="input-section">
@@ -820,7 +1221,6 @@
                     </div>
                     <div class="button-row">
                         <button class="btn btn-start" id="startBtn">Calculate</button>
-                        <button class="btn btn-reset" id="resetBtn">Reset</button>
                     </div>
                 </div>
 
@@ -828,21 +1228,27 @@
                 <div class="countdown-display" id="countdownDisplay" style="display: none;">
                     <div class="countdown-label" id="countdownLabel">Time until retirement</div>
                     <div class="countdown-time">
-                        <div class="time-unit">
-                            <span class="time-value" id="years">00</span>
+                        <div class="time-unit flip-card">
+                            <div class="flip-card-inner">
+                                <span class="time-value" id="years">00</span>
+                            </div>
                             <span class="time-label">Years</span>
                         </div>
-                        <span class="time-separator">:</span>
-                        <div class="time-unit">
-                            <span class="time-value" id="months">00</span>
+                        <span class="flip-separator">-</span>
+                        <div class="time-unit flip-card">
+                            <div class="flip-card-inner">
+                                <span class="time-value" id="months">00</span>
+                            </div>
                             <span class="time-label">Months</span>
                         </div>
-                        <span class="time-separator">:</span>
-                        <div class="time-unit">
-                            <span class="time-value" id="days">00</span>
+                        <span class="flip-separator">-</span>
+                        <div class="time-unit flip-card">
+                            <div class="flip-card-inner">
+                                <span class="time-value" id="days">00</span>
+                            </div>
                             <span class="time-label">Days</span>
                         </div>
-                        <span class="time-separator">:</span>
+                        <div class="time-section-gap"></div>
                         <div class="time-unit">
                             <span class="time-value" id="hours">00</span>
                             <span class="time-label">Hours</span>
@@ -857,7 +1263,7 @@
                             <span class="time-value" id="seconds">00</span>
                             <span class="time-label">Secs</span>
                         </div>
-                        <span class="time-separator-dot">.</span>
+                        <span class="time-separator-dot">:</span>
                         <div class="time-unit">
                             <span class="time-value" id="milliseconds">000</span>
                             <span class="time-label">ms</span>
@@ -871,23 +1277,44 @@
                 <div class="retirement-info" id="retirementInfo" style="display: none;">
                     <span id="retirementDateText"></span>
                 </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-section" id="progressSection" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Career Progress: <span class="progress-percent" id="progressPercent">0%</span></span>
+                        <span id="progressLabel">Worked 0 years</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Other tools -->
             <div class="other-tools">
                 <h3 class="other-tools-title">Other tools</h3>
                 <div class="tools-grid">
-                    <a class="tool-item" href="stopwatch.html">
+                    <a class="tool-item" href="#">
                         <div class="tool-icon">
                             <svg viewBox="0 0 64 64" fill="none">
-                                <circle cx="32" cy="36" r="20" stroke="#7b68ee" stroke-width="3" fill="#e8e6ff"/>
-                                <path d="M32 20v-8M28 12h8" stroke="#7b68ee" stroke-width="3" stroke-linecap="round"/>
-                                <circle cx="32" cy="36" r="3" fill="#7b68ee"/>
-                                <path d="M32 36V24" stroke="#7b68ee" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M32 36L40 44" stroke="#e74c3c" stroke-width="2" stroke-linecap="round"/>
+                                <rect x="10" y="6" width="44" height="52" rx="4" stroke="#7b68ee" stroke-width="2" fill="#e8e6ff"/>
+                                <rect x="14" y="12" width="36" height="12" rx="2" fill="#d4cfff"/>
+                                <rect x="14" y="28" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="24" y="28" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="34" y="28" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="44" y="28" width="8" height="6" rx="1" fill="#c4b8ff"/>
+                                <rect x="14" y="36" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="24" y="36" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="34" y="36" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="44" y="36" width="8" height="6" rx="1" fill="#c4b8ff"/>
+                                <rect x="14" y="44" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="24" y="44" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="34" y="44" width="8" height="6" rx="1" fill="#7b68ee"/>
+                                <rect x="44" y="44" width="8" height="12" rx="1" fill="#5c4fd6"/>
+                                <rect x="14" y="52" width="18" height="6" rx="1" fill="#7b68ee"/>
                             </svg>
                         </div>
-                        <span class="tool-name">Stopwatch</span>
+                        <span class="tool-name">Calculator</span>
                     </a>
                     <a class="tool-item" href="#">
                         <div class="tool-icon">
@@ -1033,6 +1460,8 @@
         // ============ Countdown Functionality ============
         let countdownInterval = null;
         let retirementDate = null;
+        let careerStartDate = null; // For progress calculation
+        let widgetVisible = false;
 
         function startCountdown() {
             const birthdayInput = document.getElementById('birthday');
@@ -1050,14 +1479,26 @@
             retirementDate = new Date(birthday);
             retirementDate.setFullYear(birthday.getFullYear() + retirementAge);
 
-            // Show retirement date info
-            const retirementInfo = document.getElementById('retirementInfo');
-            const retirementDateText = document.getElementById('retirementDateText');
-            retirementDateText.textContent = `Retirement Date: ${retirementDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
-            retirementInfo.style.display = 'block';
+            // Set career start date (assume age 22 as typical career start)
+            careerStartDate = new Date(birthday);
+            careerStartDate.setFullYear(birthday.getFullYear() + 22);
 
-            // Show countdown
+            // Update header info
+            const headerBirthday = document.getElementById('headerBirthday');
+            const headerRetirement = document.getElementById('headerRetirement');
+            headerBirthday.textContent = birthday.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            headerRetirement.textContent = retirementDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            // Show header info and hide input section completely
+            document.getElementById('cardHeaderInfo').style.display = 'flex';
+            document.querySelector('.input-section').style.display = 'none';
+
+            // Hide retirement info (now shown in header)
+            document.getElementById('retirementInfo').style.display = 'none';
+
+            // Show countdown and progress bar
             document.getElementById('countdownDisplay').style.display = 'block';
+            document.getElementById('progressSection').style.display = 'block';
 
             // Clear previous timer
             if (countdownInterval) {
@@ -1077,6 +1518,9 @@
 
             const countdownTime = document.querySelector('.countdown-time');
             const retiredMessage = document.getElementById('retiredMessage');
+
+            // Update progress bar
+            updateProgressBar(now);
 
             if (diff <= 0) {
                 // Already retired
@@ -1129,6 +1573,36 @@
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
             document.getElementById('milliseconds').textContent = milliseconds.toString().padStart(3, '0');
+
+            // Update widget if visible
+            if (widgetVisible) {
+                document.getElementById('widgetYears').textContent = years.toString().padStart(2, '0');
+                document.getElementById('widgetMonths').textContent = months.toString().padStart(2, '0');
+                document.getElementById('widgetDays').textContent = days.toString().padStart(2, '0');
+                document.getElementById('widgetHours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('widgetMinutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('widgetSeconds').textContent = seconds.toString().padStart(2, '0');
+            }
+        }
+
+        function updateProgressBar(now) {
+            if (!careerStartDate || !retirementDate) return;
+
+            const totalCareer = retirementDate - careerStartDate;
+            const workedTime = now - careerStartDate;
+
+            // Calculate percentage (clamp between 0 and 100)
+            let percent = (workedTime / totalCareer) * 100;
+            percent = Math.max(0, Math.min(100, percent));
+
+            // Calculate worked years
+            const workedYears = (workedTime / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1);
+            const totalYears = Math.round((totalCareer) / (1000 * 60 * 60 * 24 * 365.25));
+
+            // Update UI
+            document.getElementById('progressFill').style.width = percent.toFixed(2) + '%';
+            document.getElementById('progressPercent').textContent = percent.toFixed(1) + '%';
+            document.getElementById('progressLabel').textContent = `Worked ${workedYears} of ${totalYears} years`;
         }
 
         function resetCountdown() {
@@ -1138,13 +1612,26 @@
                 countdownInterval = null;
             }
 
+            // Reset global variables
+            careerStartDate = null;
+
             // Reset inputs
             document.getElementById('birthday').value = '';
             document.getElementById('retirementAge').value = '65';
 
-            // Hide countdown display
+            // Hide countdown display and progress bar
             document.getElementById('countdownDisplay').style.display = 'none';
             document.getElementById('retirementInfo').style.display = 'none';
+            document.getElementById('progressSection').style.display = 'none';
+
+            // Hide header info and show input section
+            document.getElementById('cardHeaderInfo').style.display = 'none';
+            document.querySelector('.input-section').style.display = 'block';
+
+            // Reset progress bar
+            document.getElementById('progressFill').style.width = '0%';
+            document.getElementById('progressPercent').textContent = '0%';
+            document.getElementById('progressLabel').textContent = 'Worked 0 years';
 
             // Reset countdown values
             document.getElementById('years').textContent = '00';
@@ -1159,6 +1646,124 @@
             document.querySelector('.countdown-time').style.display = 'flex';
             document.getElementById('retiredMessage').style.display = 'none';
             document.getElementById('countdownLabel').style.display = 'block';
+
+            // Close widget on reset
+            closeWidget();
+        }
+
+        // ============ Widget Control Functions ============
+        function toggleWidget() {
+            const widget = document.getElementById('countdownWidget');
+            const pinBtn = document.getElementById('pinWidgetBtn');
+            widgetVisible = !widgetVisible;
+            if (widgetVisible) {
+                widget.style.display = 'flex';
+                pinBtn.textContent = 'Unpin';
+                // Save to localStorage (including birthday for restoration)
+                localStorage.setItem('retireWidget', JSON.stringify({
+                    visible: true,
+                    retirementDate: retirementDate.toISOString(),
+                    careerStartDate: careerStartDate.toISOString(),
+                    birthday: document.getElementById('birthday').value
+                }));
+            } else {
+                widget.style.display = 'none';
+                pinBtn.textContent = 'Pin';
+                // Remove from localStorage
+                localStorage.removeItem('retireWidget');
+            }
+        }
+
+        function closeWidget() {
+            const widget = document.getElementById('countdownWidget');
+            const pinBtn = document.getElementById('pinWidgetBtn');
+            widgetVisible = false;
+            widget.style.display = 'none';
+            pinBtn.textContent = 'Pin';
+            // Remove from localStorage
+            localStorage.removeItem('retireWidget');
+        }
+
+        function initWidgetFromStorage() {
+            const saved = localStorage.getItem('retireWidget');
+            if (saved) {
+                const data = JSON.parse(saved);
+                retirementDate = new Date(data.retirementDate);
+                careerStartDate = new Date(data.careerStartDate);
+                widgetVisible = true;
+
+                // Restore widget display
+                const widget = document.getElementById('countdownWidget');
+                const pinBtn = document.getElementById('pinWidgetBtn');
+                widget.style.display = 'flex';
+                pinBtn.textContent = 'Unpin';
+
+                // Restore main card UI state
+                // 1. Update header info (birthday and retirement date)
+                const birthdayDate = data.birthday ? new Date(data.birthday) : new Date(careerStartDate.getFullYear() - 22, careerStartDate.getMonth(), careerStartDate.getDate());
+                document.getElementById('headerBirthday').textContent = birthdayDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                document.getElementById('headerRetirement').textContent = retirementDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                // 2. Show header info, hide input section
+                document.getElementById('cardHeaderInfo').style.display = 'flex';
+                document.querySelector('.input-section').style.display = 'none';
+
+                // 3. Show countdown display and progress bar
+                document.getElementById('countdownDisplay').style.display = 'block';
+                document.getElementById('progressSection').style.display = 'block';
+
+                // 4. Start countdown interval for main card
+                if (countdownInterval) clearInterval(countdownInterval);
+                countdownInterval = setInterval(updateCountdown, 10);
+
+                // Update immediately
+                updateCountdown();
+            }
+        }
+
+        function updateWidgetDisplay() {
+            if (!widgetVisible || !retirementDate) return;
+
+            const now = new Date();
+            const diff = retirementDate - now;
+
+            if (diff <= 0) return;
+
+            // Calculate time units
+            let years = retirementDate.getFullYear() - now.getFullYear();
+            let months = retirementDate.getMonth() - now.getMonth();
+            let days = retirementDate.getDate() - now.getDate();
+
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                days += lastMonth.getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            const totalSeconds = Math.floor(diff / 1000);
+            const totalMinutes = Math.floor(totalSeconds / 60);
+            const totalHours = Math.floor(totalMinutes / 60);
+            const hours = totalHours % 24;
+            const minutes = totalMinutes % 60;
+            const seconds = totalSeconds % 60;
+
+            document.getElementById('widgetYears').textContent = years.toString().padStart(2, '0');
+            document.getElementById('widgetMonths').textContent = months.toString().padStart(2, '0');
+            document.getElementById('widgetDays').textContent = days.toString().padStart(2, '0');
+            document.getElementById('widgetHours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('widgetMinutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('widgetSeconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Start widget countdown interval for standalone widget updates
+        let widgetInterval = null;
+        function startWidgetCountdown() {
+            if (widgetInterval) clearInterval(widgetInterval);
+            widgetInterval = setInterval(updateWidgetDisplay, 1000);
         }
 
         // ============ Event Bindings ============
@@ -1176,7 +1781,13 @@
             });
 
             document.getElementById('startBtn').addEventListener('click', startCountdown);
-            document.getElementById('resetBtn').addEventListener('click', resetCountdown);
+            document.getElementById('headerResetBtn').addEventListener('click', resetCountdown);
+            document.getElementById('pinWidgetBtn').addEventListener('click', toggleWidget);
+
+            // Widget click navigates back to this page (no-op on index.html, but kept for consistency)
+            document.getElementById('countdownWidget').addEventListener('click', function() {
+                // Already on index.html, no navigation needed
+            });
 
             // Enter key triggers calculation
             document.getElementById('birthday').addEventListener('keypress', function(e) {
@@ -1185,6 +1796,10 @@
             document.getElementById('retirementAge').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') startCountdown();
             });
+
+            // Initialize widget from localStorage if available
+            initWidgetFromStorage();
+            startWidgetCountdown();
         });
     </script>
 </body>
